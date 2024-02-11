@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Science Dashboard</title>
+
+    <!-- using locally hosted roslib and fonts -->
+    <!-- <link rel="stylesheet" type="text/css" href="http://localhost:8000/asset/styles.css"> -->
+    <link rel="stylesheet" type="text/css" href="asset/styles.css">
+    <script type="text/javascript" src="http://localhost:8000/asset/roslib.min.js"></script>
+    <link rel="stylesheet" href="./leaflet/leaflet.css" />
+
+
+</head>
+<style>
+    #map {
+        /* height: 600px;
+        width: 100%;
+        border-radius: auto; */
+        width: 100%;
+        height: 83%;
+        border: 3px solid #D95A27;
+    }
+</style>
+
+<body onload="loadSavedData()" style="background-color: #0B172B;">
+
+    <div style=" margin-left: 50px;">
+        <div class="header">
+            <div class="header-one">
+                <label style="color: #D95A27; margin-left: 180px;"><b>Science Mission</b></label>
+            </div>
+            <div class="header-two">
+                <img class="logo" src="asset/UMRT new logo.png" alt="">
+            </div>
+        </div>
+
+
+        <div class="main">
+
+            <!-- <label><b>AUTONOMOUS DASHBOARD</b></label>  -->
+
+
+            <div class="container">
+
+
+                <div class="column-container">
+                    <div class="one">
+                        <img id="image_sub">
+                    </div>
+                    <button id="captureButton1"
+                        style="font-size: 20px; margin-top: 5px; background-color: #0B172B; border: 2px solid #D95A27; width: 100px; margin-left: 130px;">
+                        <p id="buttonText" style=" margin: 0; color: #D95A27;">Capture</p>
+                    </button>
+
+                    <div class="two" style="border: inset 5px #D95A27;"><img id="image_sub1"></div>
+                    <button id="captureButton2"
+                        style="font-size: 20px; margin-top: 5px; background-color: #0B172B; border: 2px solid #D95A27; width: 100px; margin-left: 130px;">
+                        <p id="buttonText" style=" margin: 0; color: #D95A27;">Capture</p>
+                    </button>
+
+                    <div class="two" style="border: inset 5px #D95A27;"><img id="image_sub2"></div>
+                    <button id="captureButton3"
+                        style="font-size: 20px; margin-top: 5px; background-color: #0B172B; border: 2px solid #D95A27; width: 100px; margin-left: 130px;">
+                        <p id="buttonText" style=" margin: 0; color: #D95A27;">Capture</p>
+                    </button>
+
+
+
+                </div>
+
+                <div style="width: 100%;">
+                    <!-- <div class="side-by-side-div" > -->
+                    <div id="map" style="border: inset 5px #D95A27;"></div>
+
+                    <div class="stratDiv" >
+                        <table>
+                            <tr>
+                                <th>Stratigraphic profile</th>
+                            <td style="border: none;"><input type="text" style="height: 100%; width: 100%; background-color: #0B172B; border: 1px solid #D95A27; color: #F5882E; font-size: 19px; padding: 2px;"></td>
+                            </tr>
+                            <tr>
+                                <th>Depositional Environment</th>
+                                <td style="border: none;"><input type="text" style="height: 100%; width: 100%; background-color: #0B172B; border: 1px solid #D95A27; color: #F5882E;font-size: 19px; padding: 2px;" ></td>
+                            </tr>
+                            <tr>
+                                <th>History of water</th>
+                                <td style="border: none;"><input type="text" style="height: 100%; width: 100%; background-color: #0B172B; border: 1px solid #D95A27; color: #F5882E;font-size: 19px; padding: 2px;"></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+            <script src="./leaflet/leaflet.js"></script>
+        </div>
+
+        <div class="point-table">
+
+            <table class="point-one" style="margin-top: -840px; height: 300px;">
+                <tr>
+                    <th>Sensor</th>
+                    <td>
+                        <div id="one">Sample-1</div>
+                    </td>
+                    <td>
+                        <div id="one">Sample-2</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>pH</th>
+                    <td>
+                        <div id="one">N/A</div>
+                    </td>
+                    <td>
+                        <div id="one">N/A</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>N</th>
+                    <td>
+                        <div id="two">N/A</div>
+                    </td>
+                    <td>
+                        <div id="two">N/A</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>P</th>
+                    <td>
+                        <div id="three">N/A</div>
+                    </td>
+                    <td>
+                        <div id="three">N/A</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>K</th>
+                    <td>
+                        <div id="four">N/A</div>
+                    </td>
+                    <td>
+                        <div id="four">N/A</div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <th>T</th>
+                    <td>
+                        <div id="five">N/A</div>
+                    </td>
+                    <td>
+                        <div id="five">N/A</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>H</th>
+                    <td>
+                        <div id="six">N/A</div>
+                    </td>
+                    <td>
+                        <div id="six">N/A</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>EC</th>
+                    <td>
+                        <div id="seven">N/A</div>
+                    </td>
+                    <td>
+                        <div id="seven">N/A</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: none;"></td>
+                    <td style="border: none;">
+                        <button id="sampleButton"
+                            style="font-size: 20px; margin-top: 5px; background-color: #0B172B; border: 2px solid #D95A27;">
+                            <p id="buttonText" style=" margin: 0; color: #D95A27;">Save</p>
+                        </button>
+                    </td>
+                    <td style="border: none;">
+                        <button id="sampleButton"
+                            style="font-size: 20px; margin-top: 5px; background-color: #0B172B; border: 2px solid #D95A27;">
+                            <p id="buttonText" style=" margin: 0; color: #D95A27;">Save</p>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+
+
+
+        </div>
+
+        <div class="table-two">
+            <table class="point-two">
+                <tr>
+                    <th>P</th>
+                    <td>
+                        <div id="one"><span class="dot_table" id="sample1_p" onclick="toggle('sample1_p')"></span></div>
+                    </td>
+                    <td>
+                        <div id="one-2"><span class="dot_table" id="sample2_p" onclick="toggle('sample2_p')"></span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>C</th>
+                    <td>
+                        <div id="two"><span class="dot_table" id="sample1_c" onclick="toggle('sample1_c')"></span></div>
+                    </td>
+                    <td>
+                        <div id="two-2"><span class="dot_table" id="sample2_c" onclick="toggle('sample2_c')"></span></div>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <th>L</th>
+                    <td>
+                        <div id="three"><span class="dot_table" id="sample1_l" onclick="toggle('sample1_l')"></span></div>
+                    </td>
+                    <td>
+                        <div id="three-2"><span class="dot_table" id="sample2_l" onclick="toggle('sample2_l')"></span>
+                    </td>
+                </tr> -->
+                <tr>
+                    <th>CH</th>
+                    <td>
+                        <div id="four"><span class="dot_table" id="sample1_ch" onclick="toggle('sample1_ch')"></span></div>
+                    </td>
+                    <td>
+                        <div id="four-2"><span class="dot_table" id="sample2_ch" onclick="toggle('sample2_ch')"></span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Results</th>
+                    <td>
+                        <div id="sample1_res">N/A</div>
+                    </td>
+                    <td>
+                        <div id="sample2_res">N/A</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="border: none;"></td>
+                    <td style="border: none;">
+                        <button id="sampleButton" onclick="Lifeform_status()"
+                            style="font-size: 20px; margin-top: 5px; background-color: #0B172B; border: 2px solid #D95A27;">
+                            <p id="buttonText" style=" margin: 0; color: #D95A27;">Submit</p>
+                        </button>
+                    </td>
+                    <td colspan="2" style="border: none;">
+                        <button id="sampleButton"
+                            style="font-size: 20px; margin-top: 5px; background-color: #0B172B; border: 2px solid #D95A27;">
+                            <p id="buttonText" style=" margin: 0; color: #D95A27;">Save</p>
+                        </button>
+                    </td>
+            </table>
+
+            <div
+                style="display: flex;flex-direction: column; align-items: center; font-size: 30px; margin-top: 30px; font-family: 'JetBrains Mono', monospace; font-size: larger; margin-top: -3px;">
+                <div style="color: #D95A27; font-family: 'JetBrains Mono', monospace;">
+                    <input type="range" id="hoursSelector" class="time-selector" min="0" max="2" value="0">
+                    <span id="selectedHours" style="margin-left: 100px;">00</span> Hrs
+                </div>
+
+                <div style="color: #D95A27; font-family: 'JetBrains Mono', monospace;">
+                    <input type="range" id="minutesSelector" class="time-selector" min="0" max="59" value="0">
+                    <span id="selectedMinutes" style="margin-left: 100px;">00</span> Min
+                </div>
+
+                <div id="timer" style="color: #D95A27; font-family: 'JetBrains Mono', monospace; font-size: xx-large;">
+                    00:00:00:000</div>
+                <button id="startStopButton" onclick="startStopTimer()"
+                    style="font-size: 30px; margin-top: 5px; background-color: #0B172B; border: 2px solid #D95A27">
+                    <p id="buttonText" style=" margin: 0; color: #D95A27;">Start</p>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <button id="hiddenButton" style="display: none;"></button>
+
+    </div>
+
+    </div>
+
+
+
+    <script>
+
+        var gps_list = [];
+
+        const buttonText = document.getElementById("buttonText");
+
+
+        const Div1 = document.getElementById("one");
+        const Div2 = document.getElementById("two");
+        const Div3 = document.getElementById("three");
+        const Div4 = document.getElementById("four");
+        const Div5 = document.getElementById("five");
+        const Div6 = document.getElementById("six");
+        const Div7 = document.getElementById("seven");
+
+        const Post1Lat = document.getElementById("Post1Lat");
+        const Post1Lon = document.getElementById("Post1Lon");
+        const Post2Lat = document.getElementById("Post2Lat");
+        const Post2Lon = document.getElementById("Post2Lon");
+        const Post3Lat = document.getElementById("Post3Lat");
+        const Post3Lon = document.getElementById("Post3Lon");
+
+        const Obj1Lat = document.getElementById("Obj1Lat");
+        const Obj1Lon = document.getElementById("Obj1Lon");
+
+        const Obj2Lat = document.getElementById("Obj2Lat");
+        const Obj2Lon = document.getElementById("Obj2Lon");
+
+
+        const linveldiv = document.getElementById("linear");
+        const angularveldiv = document.getElementById("angular");
+
+        const jetsonLatencydiv = document.getElementById("jetsonLatency");
+        const RPILatencydiv = document.getElementById("RPILatency");
+
+        let latitude = 0;
+        let longitude = 0;
+
+        let timerInterval;
+        let remainingTime = 0;
+        let running = false;
+
+
+
+        var light = document.getElementById("light");
+        var isBlinking = false;
+        var locationVariable;
+        let blinkInterval;
+
+
+        // Create a ROS connection
+        const ros = new ROSLIB.Ros({
+            url: 'ws://localhost:9090',  // Adjust the URL to match your ROSBridge server address.
+        });
+
+        const velListener = new ROSLIB.Topic({
+            ros: ros,
+            name: '/cmd_vel', // velocity topic
+            messageType: 'geometry_msgs/Twist',
+        });
+
+        const navsatfixListener = new ROSLIB.Topic({
+            ros: ros,
+            name: '/nav_sat', // navSatFix message
+            messageType: 'sensor_msgs/NavSatFix'
+        });
+
+        // Define a ROS subscriber
+        const indicatorListener = new ROSLIB.Topic({
+            ros: ros,
+            name: '/indicator', // indicator message
+            messageType: 'std_msgs/String',
+        });
+
+        var listener = new ROSLIB.Topic({
+            ros: ros,
+            name: '/webcam_image/compressed',
+            messageType: 'sensor_msgs/msg/CompressedImage'
+        });
+
+        var listener2 = new ROSLIB.Topic({
+            ros: ros,
+            name: '/webcam_image_2/compressed',
+            messageType: 'sensor_msgs/msg/CompressedImage'
+        });
+
+        var listener3 = new ROSLIB.Topic({
+            ros: ros,
+            name: '/webcam_image_3/compressed',
+            messageType: 'sensor_msgs/msg/CompressedImage'
+        });
+
+        var imageData1, imageData2, imageData3;
+
+        listener.subscribe(function (message) {
+            console.log('Received message on ' + listener.name);
+            imageData1 = "data:image/jpeg;base64," + message.data;
+            updateImages();
+        });
+
+        listener2.subscribe(function (message) {
+            console.log('Received message on ' + listener2.name);
+            imageData2 = "data:image/jpeg;base64," + message.data;
+            updateImages();
+        });
+
+        listener3.subscribe(function (message) {
+            console.log('Received message on ' + listener3.name);
+            imageData3 = "data:image/jpeg;base64," + message.data;
+            updateImages();
+        });
+
+        function updateImages() {
+            if (imageData1 && imageData2 && imageData3) {
+                document.getElementById('image_sub').src = imageData1;
+                document.getElementById('image_sub1').src = imageData2;
+                document.getElementById('image_sub2').src = imageData3;
+            }
+        }
+
+        document.getElementById('captureButton').addEventListener('click', function () {
+            if (imageData1) {
+                var link = document.createElement('a');
+                link.href = imageData1;
+                link.download = 'captured_frame_1.jpg';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                console.error('No image received from topic 1 yet.');
+            }
+        });
+
+        document.getElementById('captureButton1').addEventListener('click', function () {
+            if (imageData2) {
+                var link = document.createElement('a');
+                link.href = imageData2;
+                link.download = 'captured_frame_2.jpg';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                console.error('No image received from topic 2 yet.');
+            }
+        });
+
+
+        // var listener = new ROSLIB.Topic({
+        //     ros: ros,
+        //     name: '/webcam_image/compressed3',
+        //     messageType: 'sensor_msgs/msg/CompressedImage'
+        // });
+
+        // var imageData; // To store the image data temporarily
+
+        // listener.subscribe(function (message) {
+        //     console.log('Received message on ' + listener.name);
+        //     imageData = "data:image/jpeg;base64," + message.data;
+        //     document.getElementById('image_sub3').src = imageData;
+        // });
+
+        // document.getElementById('captureButton3').addEventListener('click', function () {
+        //     // Check if an image has been received before capturing
+        //     if (imageData) {
+        //         // Create a temporary link to download the image
+        //         var link = document.createElement('a');
+        //         link.href = imageData;
+        //         link.download = 'captured_frame.jpg';
+        //         document.body.appendChild(link);
+        //         link.click();
+        //         document.body.removeChild(link);
+        //     } else {
+        //         console.error('No image received yet.');
+        //     }
+        // });
+
+
+        velListener.subscribe(function (message) {
+            const linearvel = message.linear.x.toFixed(3);
+            const angularvel = message.angular.z.toFixed(3);
+            linveldiv.style.color = "yellow";
+            angularveldiv.style.color = "yellow";
+            linveldiv.innerHTML = linearvel + " m/s";
+            angularveldiv.innerHTML = angularvel + " m/s";
+        });
+
+
+        navsatfixListener.subscribe(function (message) {
+            latitude = message.latitude.toFixed(7);
+            longitude = message.longitude.toFixed(7);
+            console.log(latitude);
+            console.log(longitude);
+
+            showDot(latitude, longitude);
+
+        });
+
+        const latencyListener = new ROSLIB.Topic({
+            ros: ros,
+            name: '/latency', // latency message
+            messageType: 'std_msgs/String',
+        });
+
+        latencyListener.subscribe(function (message) {
+            const text = message.data;
+
+            let msgArr = text.split(';');
+
+            let jetson = msgArr[0];
+            let RPI = msgArr[1];
+
+            if (jetson === "down") {
+                jetsonLatencydiv.innerHTML = `${jetson}`;
+                jetsonLatencydiv.style.color = "red";
+            }
+            else {
+                let jetsonFloat = parseFloat(jetson);
+
+                if (jetsonFloat <= 50) {
+                    jetsonLatencydiv.style.color = "#00ff59";
+                } else if (jetsonFloat > 50 && jetsonFloat < 400) {
+                    jetsonLatencydiv.style.color = "orange";
+                } else {
+                    jetsonLatencydiv.style.color = "red";
+                }
+                jetsonLatencydiv.innerHTML = `${jetson}` + " ms";
+
+            }
+
+            if (RPI === "down") {
+                RPILatencydiv.innerHTML = `${RPI}`;
+                RPILatencydiv.style.color = "red";
+            }
+            else {
+
+                let RPIFloat = parseFloat(RPI);
+
+                if (RPIFloat <= 50) {
+                    RPILatencydiv.style.color = "#00ff59";
+                } else if (jetsonFloat > 50 && RPIFloat < 400) {
+                    RPILatencydiv.style.color = "orange";
+                } else {
+                    RPILatencydiv.style.color = "red";
+                }
+                RPILatencydiv.innerHTML = `${RPI}` + " ms";
+
+            }
+
+        });
+
+
+
+
+
+        // Listen for messages from the ROS topic
+        indicatorListener.subscribe(function (message) {
+
+
+            const text = message.data;
+            console.log(text);
+
+            if (text === "RED -> Autonomous Mode") {
+                light.style.backgroundColor = "red";
+                autonomous.innerHTML = "AUTONOMOUS";
+                autonomous.style.color = "red";
+                stopBlinking();
+
+            } else if (text === "Blue -> Manual Mode") {
+                autonomous.innerHTML = "MANUAL";
+                autonomous.style.color = "#00d1ff";
+                light.style.backgroundColor = "#00d1ff";
+                stopBlinkingGreen();
+            }
+            else if (text === "Point Reached: 1") {
+                my_string = "Reached";
+                Div1.innerHTML = "Reached";
+                Div1.style.color = "#00ff59"; // make the text bold
+                saveData(Div1.id, my_string);
+
+                showGreen(latitude, longitude);
+
+                if (isBlinking == false) {
+                    startBlinking();
+                }
+                else if (isBlinking == true) {
+                    console.log(isBlinking);
+                }
+
+            }
+            else if (text === "Point Reached: 2") {
+                my_string = "Reached";
+                Div2.innerHTML = "Reached";
+                Div2.style.color = "#00ff59";
+                saveData(Div2.id, my_string);
+
+                showGreen(latitude, longitude);
+
+
+
+                if (isBlinking == false) {
+                    startBlinking();
+                }
+                else if (isBlinking == true) {
+                    console.log(isBlinking);
+                }
+            }
+            else if (text === "Point Reached: 3") {
+                my_string = "Reached";
+                Div3.innerHTML = "Reached";
+                Div3.style.color = "#00ff59";
+                saveData(Div3.id, my_string);
+                // save post coordinate (required for autonomous course restart) by reading current /nav_sat data
+                Post1Lat.innerHTML = `${latitude}`;
+                Post1Lon.innerHTML = `${longitude}`;
+
+                savePostLat(Post1Lat.id, `${latitude}`);
+                savePostLon(Post1Lon.id, `${longitude}`);
+
+                showAruco(latitude, longitude);
+
+                if (isBlinking == false) {
+                    startBlinking();
+                }
+                else if (isBlinking == true) {
+                    console.log(isBlinking);
+                }
+            }
+            else if (text === "Point Reached: 4") {
+                my_string = "Reached";
+                Div4.innerHTML = "Reached";
+                Div4.style.color = "#00ff59";
+                saveData(Div4.id, my_string);
+                // save post coordinate (required for autonomous course restart) by reading current /nav_sat data
+                Post2Lat.innerHTML = `${latitude}`;
+                Post2Lon.innerHTML = `${longitude}`;
+
+                savePostLat(Post2Lat.id, `${latitude}`);
+                savePostLon(Post2Lon.id, `${longitude}`);
+
+                showAruco(latitude, longitude);
+
+                if (isBlinking == false) {
+                    startBlinking();
+                }
+                else if (isBlinking == true) {
+                    console.log(isBlinking);
+                }
+            }
+            else if (text === "Point Reached: 5") {
+                my_string = "Reached";
+                Div5.innerHTML = "Reached";
+                Div5.style.color = "#00ff59";
+                saveData(Div5.id, my_string);
+                // save post coordinate (required for autonomous course restart) by reading current /nav_sat data
+                Post3Lat.innerHTML = `${latitude}`;
+                Post3Lon.innerHTML = `${longitude}`;
+
+                savePostLat(Post3Lat.id, `${latitude}`);
+                savePostLon(Post3Lon.id, `${longitude}`);
+
+                showAruco(latitude, longitude);
+
+                if (isBlinking == false) {
+                    startBlinking();
+                }
+                else if (isBlinking == true) {
+                    console.log(isBlinking);
+                }
+            }
+            else if (text === "Point Reached: 6") {
+                my_string = "Reached";
+                Div6.innerHTML = "Reached";
+                Div6.style.color = "#00ff59";
+                saveData(Div6.id, my_string);
+                // save post coordinate (required for autonomous course restart) by reading current /nav_sat datasave post coordinate by reading current /nav_sat data
+                Obj1Lat.innerHTML = `${latitude}`;
+                Obj1Lon.innerHTML = `${longitude}`;
+
+                saveObjLat(Obj1Lat.id, `${latitude}`);
+                saveObjLon(Obj1Lon.id, `${longitude}`);
+
+                showHammer(latitude, longitude);
+
+                if (isBlinking == false) {
+                    startBlinking();
+                }
+                else if (isBlinking == true) {
+                    console.log(isBlinking);
+                }
+            }
+            else if (text === "Point Reached: 7") {
+                my_string = "Reached";
+                Div7.innerHTML = "Reached";
+                Div7.style.color = "#00ff59";
+                saveData(Div7.id, my_string);
+                // save post coordinate (required for autonomous course restart) by reading current /nav_sat data
+                Obj2Lat.innerHTML = `${latitude}`;
+                Obj2Lon.innerHTML = `${longitude}`;
+
+                saveObjLat(Obj2Lat.id, `${latitude}`);
+                saveObjLon(Obj2Lon.id, `${longitude}`);
+
+                showBottle(latitude, longitude);
+
+                if (isBlinking == false) {
+                    startBlinking();
+                }
+                else if (isBlinking == true) {
+                    console.log(isBlinking);
+                }
+            }
+
+
+            function saveData(divName, my_string) {
+                console.log(divName);
+                sessionStorage.setItem(divName.toString(), my_string);
+            }
+
+            function savePostLat(divName, lat) {
+                console.log(divName);
+                sessionStorage.setItem(divName.toString(), lat);
+            }
+
+            function savePostLon(divName, lon) {
+                console.log(divName);
+                sessionStorage.setItem(divName.toString(), lon);
+            }
+
+            function saveObjLat(divName, lat) {
+                console.log(divName);
+                sessionStorage.setItem(divName.toString(), lat);
+            }
+
+            function saveObjLon(divName, lon) {
+                console.log(divName);
+                sessionStorage.setItem(divName.toString(), lon);
+            }
+
+
+
+
+
+            function startBlinking() {
+                isBlinking = true;
+                light.style.backgroundColor = "green";
+                blinkInterval = setInterval(function () {
+                    if (light.style.backgroundColor === "green") {
+                        light.style.backgroundColor = "transparent";
+                    } else {
+                        light.style.backgroundColor = "green";
+                    }
+                }, 300); // Blink every 500ms
+            }
+
+            function stopBlinking() {
+                light.style.backgroundColor = "red";
+                clearInterval(blinkInterval); // Clear the interval to stop blinking
+                isBlinking = false;
+            }
+
+            function stopBlinkingGreen() {
+                light.style.backgroundColor = "#135DD8";
+                clearInterval(blinkInterval); // Clear the interval to stop blinking
+                isBlinking = false;
+            }
+
+        });
+
+        function showCoordinates(lat, lng) {
+            fetch('gps_data.json')
+                .then(response => response.json())
+                .then(coordinatesArray => {
+                    var centerLat = coordinatesArray[0][0];
+                    var centerLong = coordinatesArray[0][1];
+
+                    // Dynamic Map loading based on coordinates from 'gps_data.json'
+                    var firstCoordinate = coordinatesArray[0];
+                    var firstCoordinateLongitude = firstCoordinate[1].toFixed(8);
+                    var min_zoom = 15;
+                    var max_zoom = 20;
+
+                    if (firstCoordinateLongitude.startsWith('90.44')) {
+                        locationVariable = 'UIU';
+                    } else if (firstCoordinateLongitude.startsWith('-110.13')) {
+                        locationVariable = 'GreenRiver';
+                    } else {
+                        locationVariable = 'MDRS';
+                        min_zoom = 14;
+                    }
+
+                    var tileUrl = 'Map/' + locationVariable + '/{z}/{x}/{y}.jpg'; // please modify the image format
+                    map = L.map('map', { attributionControl: false }).setView([centerLat, centerLong], 18);
+
+                    L.tileLayer(tileUrl, {
+                        minZoom: min_zoom,
+                        maxZoom: max_zoom,
+                    }).addTo(map);
+
+
+                    for (let i = (coordinatesArray.length - 1); i >= 0; i--) {
+                        const coord = coordinatesArray[i];
+                        if (i == 0) {
+                            var customIcon = L.icon({
+                                iconUrl: './asset/start-pin.png',
+                                iconSize: [17, 30],
+                                iconAnchor: [10, 25],  // offset in map 
+                                popupAnchor: [0, 0]
+                            });
+
+                            L.marker([coord[0], coord[1]], { icon: customIcon }).addTo(map)
+                                .bindPopup(() => 'GNSS: ' + i + '<br>' + coord[0] + ', ' + coord[1]);
+
+                        } else {
+                            var customIcon = L.icon({
+                                iconUrl: './asset/pin-' + i + '.png',
+                                iconSize: [17, 30],
+                                iconAnchor: [10, 25],  // offset in map 
+                                popupAnchor: [0, 0]
+                            });
+                            L.marker([coord[0], coord[1]], { icon: customIcon }).addTo(map)
+                                .bindPopup(() => 'GNSS: ' + i + '<br>' + coord[0] + ', ' + coord[1])
+                                .openPopup();
+                        }
+
+                        var polylineWeight = 1;
+                        var polyline = L.polyline(coordinatesArray, { color: 'white', weight: polylineWeight }).addTo(map);
+                        if (i > 0) {
+                            var distance = haversineDistance(coord, coordinatesArray[i - 1]);
+                            var text = distance.toFixed(2) + 'm';
+                            var middlePoint = [(coord[0] + coordinatesArray[i - 1][0]) / 2, (coord[1] + coordinatesArray[i - 1][1]) / 2];
+                            var textIcon = L.divIcon({ className: 'map-text-label', html: text });
+                            L.marker(middlePoint, { icon: textIcon }).addTo(map);
+                        }
+                    }
+
+                })
+                .catch(error => {
+                    console.error('Error loading coordinates:', error);
+                });
+        }
+
+        function degToRad(degrees) {
+            return degrees * (Math.PI / 180);
+        }
+
+        function haversineDistance(coord1, coord2) {
+            const R = 6371000;
+            const lat1 = degToRad(coord1[0]);
+            const lon1 = degToRad(coord1[1]);
+            const lat2 = degToRad(coord2[0]);
+            const lon2 = degToRad(coord2[1]);
+
+            const dlat = lat2 - lat1;
+            const dlon = lon2 - lon1;
+
+            const a = Math.sin(dlat / 2) * Math.sin(dlat / 2) +
+                Math.cos(lat1) * Math.cos(lat2) *
+                Math.sin(dlon / 2) * Math.sin(dlon / 2);
+
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+            const distance = R * c;
+
+            return distance;
+        }
+
+
+        function showDot(lat, long) {
+
+            gps_list.push([lat, long]);
+
+            if (!map) {
+                setTimeout(() => {
+                    showDot(lat, long);
+                }, 100);
+                return;
+            }
+
+            // var polyline = L.polyline(gps_list, { color: 'blue' }).addTo(map);
+            // Define the weight (thickness) of the polyline
+            var polylineWeight = 1; // Change this value to set the desired thickness
+
+            var polyline = L.polyline(gps_list, { color: 'yellow', weight: polylineWeight }).addTo(map);
+
+
+            // var customIcon = L.icon({
+            //     iconUrl: 'dot.png', // Assuming a dot marker image
+            //     iconSize: [1, 1],
+            //     iconAnchor: [5, 5]
+            // });
+
+            // L.marker([lat, long], { icon: customIcon }).addTo(map);
+        }
+
+        showCoordinates();
+
+        function showGreen(lat, long) {
+
+            gps_list.push([lat, long]);
+
+            if (!map) {
+                setTimeout(() => {
+                    showDot(lat, long);
+                }, 100);
+                return;
+            }
+
+            var customIcon = L.icon({
+                iconUrl: './asset/point_01_.gif', // Only GPS
+                iconSize: [20, 23],
+                iconAnchor: [10, 25]  // offset in map 
+            });
+
+            L.marker([lat, long], { icon: customIcon }).addTo(map);
+        }
+
+        function showAruco(lat, long) {
+
+            gps_list.push([lat, long]);
+
+            if (!map) {
+                setTimeout(() => {
+                    showDot(lat, long);
+                }, 100);
+                return;
+            }
+
+            var customIcon = L.icon({
+                iconUrl: './asset/point_234.gif', // ArUco
+                iconSize: [15, 15],
+                iconAnchor: [10, 25]  // offset in map 
+            });
+
+            L.marker([lat, long], { icon: customIcon }).addTo(map);
+        }
+
+        function showHammer(lat, long) {
+
+            gps_list.push([lat, long]);
+
+            if (!map) {
+                setTimeout(() => {
+                    showDot(lat, long);
+                }, 100);
+                return;
+            }
+
+            var customIcon = L.icon({
+                iconUrl: './asset/point_5.gif', // OrangeRubberMallet
+                iconSize: [25, 25],
+                iconAnchor: [10, 25]  // offset in map 
+            });
+
+            L.marker([lat, long], { icon: customIcon }).addTo(map);
+        }
+
+        function showBottle(lat, long) {
+
+            gps_list.push([lat, long]);
+
+            if (!map) {
+                setTimeout(() => {
+                    showDot(lat, long);
+                }, 100);
+                return;
+            }
+
+            var customIcon = L.icon({
+                iconUrl: './asset/point_6.gif', // Bottle
+                iconSize: [25, 25],
+                iconAnchor: [10, 25]  // offset in map 
+            });
+
+            L.marker([lat, long], { icon: customIcon }).addTo(map);
+        }
+
+        function loadSavedData() {
+            if (sessionStorage.getItem("one")) {
+                document.getElementById("one").textContent = sessionStorage.getItem("one");
+                document.getElementById("one").style.color = "#00ff59";
+            }
+
+            if (sessionStorage.getItem("two")) {
+                document.getElementById("two").textContent = sessionStorage.getItem("two");
+                document.getElementById("two").style.color = "#00ff59";
+            }
+
+            if (sessionStorage.getItem("three")) {
+                document.getElementById("three").textContent = sessionStorage.getItem("three");
+                document.getElementById("three").style.color = "#00ff59";
+            }
+
+            if (sessionStorage.getItem("four")) {
+                document.getElementById("four").textContent = sessionStorage.getItem("four");
+                document.getElementById("four").style.color = "#00ff59";
+            }
+
+            if (sessionStorage.getItem("five")) {
+                document.getElementById("five").textContent = sessionStorage.getItem("five");
+                document.getElementById("five").style.color = "#00ff59";
+            }
+
+            if (sessionStorage.getItem("six")) {
+                document.getElementById("six").textContent = sessionStorage.getItem("six");
+                document.getElementById("six").style.color = "#00ff59";
+            }
+
+            if (sessionStorage.getItem("seven")) {
+                document.getElementById("seven").textContent = sessionStorage.getItem("seven");
+                document.getElementById("seven").style.color = "#00ff59";
+            }
+
+            if (sessionStorage.getItem("Post1Lat")) {
+                document.getElementById("Post1Lat").textContent = sessionStorage.getItem("Post1Lat");
+            }
+
+            if (sessionStorage.getItem("Post1Lon")) {
+                document.getElementById("Post1Lon").textContent = sessionStorage.getItem("Post1Lon");
+            }
+
+            if (sessionStorage.getItem("Post2Lat")) {
+                document.getElementById("Post2Lat").textContent = sessionStorage.getItem("Post2Lat");
+            }
+
+            if (sessionStorage.getItem("Post2Lon")) {
+                document.getElementById("Post2Lon").textContent = sessionStorage.getItem("Post2Lon");
+            }
+
+            if (sessionStorage.getItem("Post3Lat")) {
+                document.getElementById("Post3Lat").textContent = sessionStorage.getItem("Post3Lat");
+            }
+
+            if (sessionStorage.getItem("Post3Lon")) {
+                document.getElementById("Post3Lon").textContent = sessionStorage.getItem("Post3Lon");
+            }
+
+            if (sessionStorage.getItem("Obj1Lat")) {
+                document.getElementById("Obj1Lat").textContent = sessionStorage.getItem("Obj1Lat");
+            }
+
+            if (sessionStorage.getItem("Obj1Lon")) {
+                document.getElementById("Obj1Lon").textContent = sessionStorage.getItem("Obj1Lon");
+            }
+
+            if (sessionStorage.getItem("Obj2Lat")) {
+                document.getElementById("Obj2Lat").textContent = sessionStorage.getItem("Obj2Lat");
+            }
+
+            if (sessionStorage.getItem("Obj2Lon")) {
+                document.getElementById("Obj2Lon").textContent = sessionStorage.getItem("Obj2Lon");
+            }
+        }
+
+        function startStopTimer() {
+            const button = document.getElementById("startStopButton");
+
+            if (!running) {
+                button.textContent = "Stop";
+                document.getElementById("startStopButton").style.color = "#D95A27";
+                remainingTime = calculateRemainingTime();
+                timerInterval = setInterval(updateTimer, 10);
+                running = true;
+            } else {
+                button.textContent = "Start";
+                clearInterval(timerInterval);
+                running = false;
+            }
+        }
+
+        function updateTimer() {
+            remainingTime -= 10;
+            if (remainingTime <= 0) {
+                clearInterval(timerInterval);
+                remainingTime = 0;
+                running = false;
+                document.getElementById("startStopButton").textContent = "Start";
+                document.getElementById("startStopButton").style.color = "#D95A27";
+                document.getElementById("buttonText").style.fontFamily = "'JetBrains Mono', monospace";
+
+
+            }
+            const formattedTime = formatTime(remainingTime);
+            document.getElementById("timer").textContent = formattedTime;
+        }
+
+        function formatTime(milliseconds) {
+            let ms = milliseconds % 1000;
+            milliseconds = (milliseconds - ms) / 1000;
+            let secs = milliseconds % 60;
+            milliseconds = (milliseconds - secs) / 60;
+            let mins = milliseconds % 60;
+            let hrs = (milliseconds - mins) / 60;
+
+            return pad(hrs) + ':' + pad(mins) + ':' + pad(secs) + ':' + pad(ms, 3);
+        }
+
+
+        function pad(number, size = 2) {
+            let result = String(number);
+            while (result.length < size) {
+                result = '0' + result;
+            }
+            return result;
+        }
+
+        function calculateRemainingTime() {
+            const hours = parseInt(document.getElementById("hoursSelector").value, 10);
+            const minutes = parseInt(document.getElementById("minutesSelector").value, 10);
+            return (hours * 60 + minutes) * 60 * 1000;
+        }
+
+        document.getElementById("hoursSelector").addEventListener("input", function () {
+            const selectedHours = parseInt(this.value, 10);
+            document.getElementById("selectedHours").textContent = pad(selectedHours);
+        });
+
+        document.getElementById("minutesSelector").addEventListener("input", function () {
+            const selectedMinutes = parseInt(this.value, 10);
+            document.getElementById("selectedMinutes").textContent = pad(selectedMinutes);
+        });
+
+        const sliderEl = document.querySelector("#range")
+        const sliderValue = document.querySelector(".value")
+
+        sliderEl.addEventListener("input", (event) => {
+            const tempSliderValue = event.target.value;
+
+            sliderValue.textContent = tempSliderValue;
+
+            const progress = (tempSliderValue / sliderEl.max) * 100;
+
+            sliderEl.style.background = `linear-gradient(to right, #f50 ${progress}%, #ccc ${progress}%)`;
+        })
+
+
+
+        function toggle(id){
+        var word = id.split('_')
+        if(word[1]!='i' && word[1]!='f'){
+          var x = document.getElementById(id);
+          if(x.className == 'dot_table'){
+            x.className = 'dot_active_table';
+          }else{
+            x.className = 'dot_table';
+          }
+        }else{
+          if(word[1] == 'i'){
+            
+            var y = document.getElementById(id);
+            if(y.className == 'dot_table'){
+              y.className = 'dot_active_table';
+              
+              var a = word[0]+'_f'
+              var x = document.getElementById(a);
+              x.className = 'dot_table';
+            }
+            else{
+              y.className = 'dot_table';
+            }
+          }else{
+
+            var y = document.getElementById(id);
+            if(y.className == 'dot_table'){
+              y.className = 'dot_active_table';
+              
+              var a = word[0]+'_i'
+              var x = document.getElementById(a);
+              x.className = 'dot_table';
+            }
+            else{
+              y.className = 'dot_table';
+            }
+          }
+        }
+        
+
+      }
+
+      function Lifeform_status(){
+        console.log('clicked')
+        getResult('sample1')
+        getResult('sample2')
+        getResult('sample3')
+        getResult('sample4')
+      }
+      
+      
+      function reset(){
+        document.getElementById("results").innerHTML=""
+      }
+
+      function getResult(instance) {
+    console.log(instance);
+    let result = false;
+    var sample_res = document.getElementById(instance + '_res');
+    var sample_p = document.getElementById(instance + '_p').className; //0
+    var sample_c = document.getElementById(instance + '_c').className; //1
+    var sample_ch = document.getElementById(instance + '_ch').className; //3
+    if (sample_p === 'dot_active_table') {
+        result = 'Extant';
+    } else {
+        if (sample_c === 'dot_active_table') {
+            if (sample_ch === 'dot_active_table') {
+                result = 'Extant';
+            } else {
+                result = 'Extinct';
+            }
+        } else {
+            if (sample_ch === 'dot_active_table') {
+                result = 'Extant';
+            } else {
+                result = 'NPL';
+            }
+        }
+    }
+    console.log(result);
+    sample_res.innerHTML = result;
+}
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>
